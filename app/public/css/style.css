@@ -51,3 +51,14 @@ html {
 	background-color: #a9b6b5;
 	cursor: initial;
 }
+
+/*
+	technique to center font-awesome icons within a div
+	credits to Michael Brown https://codepen.io/mfbrown/pen/Lqfid
+*/
+.tile:before{
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+}

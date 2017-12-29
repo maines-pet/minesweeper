@@ -15,7 +15,7 @@ $(document).ready(function () {
 		if (newGame.tiles[target.data("row")][target.data("column")].boolRevealed) return;
 
 		if (checkForMine(target.data("row"), target.data("column"))){
-			game_over = true;
+			gameOver();
 		} else {
 			reveal(target.data("row"), target.data("column"), newGame);
 		}
@@ -48,25 +48,28 @@ function Game(rows, columns, mineCountInput){
 			this.tiles.push(singleRowOfTile);
 		}
 		//test remove
-		this.tiles[3][5].boolMine = true;
-		this.tiles[4][5].boolMine = true;
-		this.tiles[5][5].boolMine = true;
-		this.tiles[6][5].boolMine = true;
-		this.tiles[0][11].boolMine = true;
-		this.tiles[4][3].boolMine = true;
-		this.tiles[2][6].boolMine = true;
-		this.tiles[7][6].boolMine = true;
-		this.tiles[2][7].boolMine = true;
-		this.tiles[2][8].boolMine = true;
-		this.tiles[3][9].boolMine = true;
-		this.tiles[4][9].boolMine = true;
-		this.tiles[5][8].boolMine = true;
-		this.tiles[6][8].boolMine = true;
-		this.tiles[2][9].boolMine = true;
-		this.tiles[7][7].boolMine = true;
-		this.tiles[3][7].boolMine = true;
-		this.tiles[4][7].boolMine = true;
-		this.tiles[4][8].boolMine = true;
+this.tiles[0][3].boolMine = true;
+this.tiles[1][2].boolMine = true;
+this.tiles[10][4].boolMine = true;
+this.tiles[10][6].boolMine = true;
+this.tiles[11][5].boolMine = true;
+this.tiles[2][2].boolMine = true;
+this.tiles[3][2].boolMine = true;
+this.tiles[4][2].boolMine = true;
+this.tiles[4][3].boolMine = true;
+this.tiles[5][2].boolMine = true;
+this.tiles[5][4].boolMine = true;
+this.tiles[6][2].boolMine = true;
+this.tiles[6][5].boolMine = true;
+this.tiles[7][2].boolMine = true;
+this.tiles[7][6].boolMine = true;
+this.tiles[8][2].boolMine = true;
+this.tiles[8][3].boolMine = true;
+this.tiles[8][4].boolMine = true;
+this.tiles[8][6].boolMine = true;
+this.tiles[9][6].boolMine = true;
+
+// revealEverything();
 
 
 
@@ -85,14 +88,7 @@ function Game(rows, columns, mineCountInput){
 			markNeighbouringTiles(tile.row, tile.column, newGame);
 		}
 		
-
-		//reveal everything testing
-		// this.tiles.forEach(function (innerArray, outerIndex) {
-		// 	innerArray.forEach(function (elem, innerIndex) {
-		// 		$(`div[data-row=${outerIndex}][data-column=${innerIndex}] .neighbour-mine-count`).text(elem.neighbouringMines || "");
-		// 	})
-		// })
-		console.log(this);
+		// console.log(this);
 		
 	};
 }
@@ -115,9 +111,11 @@ function reveal(row, column, game) {
 		if (!checkForMine(row, column) && !targetTile.boolRevealed && targetTile.underRecursion === false){
 			targetTile.underRecursion = true;
 			targetTile.boolRevealed == true;
-			let target = `div[data-row=${row}][data-column=${column}]`;
-			$(target + " .neighbour-mine-count").text(targetTile.neighbouringMines || "");
-			$(target).addClass("revealed-tile");
+
+			let targetDiv = `div[data-row=${row}][data-column=${column}]`;
+			revealNeighbourCount(targetDiv, targetTile)
+			// $(target + " .neighbour-mine-count").text(targetTile.neighbouringMines || "");
+			// $(target).addClass("revealed-tile");
 			// reveal(row, column + 1, game);
 			// reveal(row + 1, column, game);
 			// reveal(row - 1, column, game);
@@ -160,7 +158,29 @@ function markNeighbouringTiles  (row, column, game) {
 			}
 		}
 	}
+}
 
+function gameOver() {
+	revealEverything();
+}
 
+function revealNeighbourCount(div, tile) {
+	//let targetTile = `div[data-row=${outerIndex}][data-column=${innerIndex}]`;
+	$(div + " .neighbour-mine-count").text(tile.neighbouringMines || "");
+	$(div).addClass("revealed-tile");
+	$(div + " .icon-placeholder").addClass(tile.boolMine ? "fa-bomb" : "");
+}
 
+function revealEverything() {
+	//reveal everything testing
+	newGame.tiles.forEach(function (innerArray, outerIndex) {
+		innerArray.forEach(function (elem, innerIndex) {
+			if (elem.boolRevealed) return;
+			let targetDiv = `div[data-row=${outerIndex}][data-column=${innerIndex}]`;
+			revealNeighbourCount(targetDiv, elem);
+			// $(targetTile + " .neighbour-mine-count").text(elem.neighbouringMines || "");
+			// $(targetTile).addClass("revealed-tile");
+			// $(targetTile + " .icon-placeholder").addClass(elem.boolMine ? "fa-bomb" : "");
+		})
+	})
 }
