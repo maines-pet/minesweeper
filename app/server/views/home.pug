@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	#wrapper
+		-
+			var rows = inputRow || 12, columns = inputColumn || 12
+		#game-board(data-row = rows data-column = columns)
+			- for (var r = 0; r < rows; r++)
+				// .rows
+				- for (var c = 0; c < columns; c++)
+					.tile(data-row=r data-column=c)
+						.neighbour-mine-count
+				.new-row-clear
+block scripts
+	script(src='/js/mine.js')
