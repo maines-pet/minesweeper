@@ -34,6 +34,7 @@ Start the application
     npm start
 ```
 A screenshot is given below and you can refer to this [live demo](https://minesweeper-manalili.herokuapp.com/)
+
 ![demo](/demo/demo.png)
 
 ## Built With
