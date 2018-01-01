@@ -8,7 +8,11 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/app/public'));
 
 app.get('/', function(req, res){
-	res.render('home', {title : 'minesweeper', inputRow : 12, inputColumn : 12});
+	res.render('home', {title : 'minesweeper', inputRow : 9, inputColumn : 9});
+});
+
+app.get('/game', function (req, res) {
+	res.render('home', {title : 'minesweeper', inputRow : req.query.row, inputColumn : req.query.column});
 });
 
 

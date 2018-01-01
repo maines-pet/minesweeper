@@ -1,6 +1,14 @@
 extends layout
 
 block content
+	#controls
+		#mines-remaining.control-wrap
+			.label Mines
+			#mine-count 1
+		#time-lapsed.control-wrap
+			.label Time
+			#time-count 0
+		#restart > Restart
 	#wrapper
 		-
 			var rows = inputRow || 12, columns = inputColumn || 12

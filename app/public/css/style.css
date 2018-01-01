@@ -1,14 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:700');
+
 html {
 	padding: 0;
 	margin: 0;
+	font-family: Barlow, "San Serif", Arial;
 }
 
-
+body{
+	margin-top: 1em;
+}
 
 #wrapper{
 	width: 60%;
 	margin: auto;
     text-align: center;
+}
+
+
+#controls{
+	float:left;
+	font-size: 2em;
+    margin-left: 10%;
+}
+
+#controls:after{
+	content: "";
+	clear:both;
 }
 
 #game-board{
@@ -25,13 +43,17 @@ html {
 	float: left;
 
 	vertical-align: middle;
-	border: 1px solid white;
-	background-color: gray;
+	border: 2.5px outset #e1e1e1;
+	background-color: #d9d7d7;
 	box-sizing: border-box;
 	position: relative;
 	cursor: pointer;
 	transition: background-color 0.5s;
+	font-family: 'Roboto Mono', monospace;
+}
 
+.pressed, .revealed-tile{
+	border: 1px solid #bbbbbb !important;
 }
 
 .new-row-clear{
@@ -48,7 +70,6 @@ html {
 }
 
 .revealed-tile{
-	background-color: #a9b6b5;
 	cursor: initial;
 }
 
@@ -61,4 +82,96 @@ html {
 	display: inline-block;
 	vertical-align: middle;
 	height: 100%;
+}
+
+.flagged{
+	color: rgb(254, 0, 0);
+}
+
+.crossed{
+	color: red;
+}
+
+.wrong-flag{
+	color: pink;
+}
+
+.control-wrap{
+	margin-bottom: 1em;
+}
+
+#restart{
+	margin-top: 2em;
+	transition: color 0.5s;
+	cursor: pointer;
+}
+
+#time-lapsed{
+	overflow: hidden;
+}
+
+#restart:hover{
+	color: red;
+	transition: color 0.5s;
+}
+
+
+
+.start-timer{
+	-webkit-animation: dropSeconds 1s ease infinite;
+	-o-animation: dropSeconds 1s ease infinite;
+	animation: dropSeconds 1s ease infinite;
+}
+
+@keyframes dropSeconds{
+	0% {
+		/*transform: translateY(0%);*/
+		transform: translateX(0%);
+	}
+	60% {
+		/*transform: translateY(0%);*/
+		transform: translateX(0%);
+	}
+
+	100%{
+		/*transform: translateY(100%);*/
+		transform: translateX(-100%);
+	}
+}
+
+.mines-0{
+	/*no color*/
+}
+
+.mines-1{
+	color: rgb(1, 0, 254);
+}
+
+.mines-2{
+	color: rgb(1, 127, 1);
+}
+
+.mines-3{
+	color: rgb(254, 0, 0);
+}
+
+.mines-4{
+	color: rgb(1, 0, 128);
+}
+
+.mines-5{
+	color: rgb(129, 1, 2);
+}
+
+.mines-6{
+	color: rgb(0, 128, 129);
+}
+
+.mines-7{
+	color: rgb(0, 0, 0);
+}
+
+
+.mines-8{
+	color: rgb(129, 129, 129);
 }
