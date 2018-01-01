@@ -234,14 +234,15 @@ function gameOver(boolWinGame) {
 
 }
 
-function revealEverything() {
+function revealEverything(callback) {
 	newGame.tiles.forEach(function (innerArray, outerIndex) {
 		innerArray.forEach(function (elem, innerIndex) {
 			if (elem.boolRevealed) return;
 			let targetDiv = `div[data-row=${outerIndex}][data-column=${innerIndex}]`;
 			revealNeighbourCount(targetDiv, elem);
 		})
-	})
+	});
+	callback();
 }
 
 function revealNeighbourCount(div, tile) {
