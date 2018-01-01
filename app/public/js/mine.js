@@ -224,12 +224,14 @@ function gameOver(boolWinGame) {
 	boolFirstMove = true;
 	$("#time-count").removeClass("start-timer");
 
-	revealEverything();
-	if (boolWinGame){
-		alert("You won.")
-	} else {
-		alert("You lose. \n Try again.")
-	}
+	revealEverything(function () {
+		if (boolWinGame){
+			alert("You won.")
+		} else {
+			alert("You lose. \n Try again.")
+		}
+	});
+
 }
 
 function revealEverything() {

@@ -17,4 +17,4 @@ app.get('/game', function (req, res) {
 
 
 app.listen(process.env.PORT || 8085);
-console.log('listening at 8085');
+console.log('listening at ' + (process.env.PORT || 8085));
